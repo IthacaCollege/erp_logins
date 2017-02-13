@@ -1,0 +1,100 @@
+var s=document.getElementsByTagName('script')[0];
+var loadJs=function(url){
+	var js=document.createElement('script'); js.type='text/javascript'; js.src=url; s.parentNode.insertBefore(js,s);
+}
+if(document.body.id!="MainBody" && typeof window.jQuery!="function"){
+	loadJs(document.location.protocol+"//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js");
+}
+var drawerCallback=function(o){
+	jQuery(function($){
+		var drawerBox=$("<div>",{id:"panel"}).hide().addClass("span-24 last");
+		$("<div>").addClass("panel_wrapper").append($("<div>").addClass("container").append(drawerBox)).insertAfter("div.globalmenu_wrapper:first");
+		for(p in o){
+			$("<div>",{id:p}).hide().addClass("span-24 last").append(o[p]).appendTo(drawerBox);
+		}
+		$("#panel h4 + p").each(function(){
+			var link=$(this).css({"cursor":"pointer"}).prev("h4").find("a").attr("href");
+			$(this).click(function(){ location.href=link; });
+		});
+	});
+}
+var runJqDrawer=function(){
+jQuery(function($){
+	if(document.body.id!="MainBody") {
+	var icDrawerBase="/",icDrawerSrc=$('script[src*="ic_drawer.js"]').attr("src");
+	if(!icDrawerSrc.match(/^\/[^\/]/)){
+		var parts = icDrawerSrc.split('/');
+		icDrawerBase=document.location.protocol+"//"+parts[2]+"/";
+	}
+	loadJs(icDrawerBase+"css2/js/drawer/ic_drawer_data.php");
+	var isDrawerOpen=false,hoverWaiter=null,activeMenu=null,closedOn=false;
+	var whichPanel=$("#globalmenu a").slice(0,1).attr("rel");
+	var closeDrawer=function(){
+		if (isDrawerOpen===true) {
+			isDrawerOpen=1;
+			activeMenu=null;
+			$("#globalmenu a.active").removeClass("active");
+			$("#panel").slideUp("fast",function(){ isDrawerOpen=false; $("#globalmenu a.active").removeClass("active"); });
+		}
+	}
+	var openDrawer=function(){
+		hoverWaiter=null;
+		closedOn=false;
+		if (isDrawerOpen===false) {
+			isDrawerOpen=1;
+			$("#panel").slideDown("fast",function(){ isDrawerOpen=true; });
+		}
+		if(!$(whichPanel).is(":visible")){
+			$("#panel > div").hide();
+			$(whichPanel).show();
+		}
+		if(activeMenu){
+			$("#globalmenu a.active").not(activeMenu).removeClass("active");
+			activeMenu.addClass("active");
+		}else{
+			$("#globalmenu a.active").removeClass("active")
+		}
+	}
+	$("#globalmenu a").click(function(){
+		if (isDrawerOpen===false){
+			activeMenu=$(this);
+			whichPanel=activeMenu.attr("rel");
+			openDrawer();
+		}else if(isDrawerOpen===true && whichPanel==$(this).attr("rel")) {
+			closedOn=$(this);
+			closeDrawer();
+		}
+		return false;
+	}).mousemove(function(){
+		if(isDrawerOpen){
+			activeMenu=$(this);
+			whichPanel=activeMenu.attr("rel");
+			openDrawer();
+		}else if(closedOn && $(this).attr("rel")==closedOn.attr("rel")){
+			return false;
+		}else if(hoverWaiter===null){
+			activeMenu=$(this);
+			whichPanel=activeMenu.attr("rel");
+			hoverWaiter=setTimeout(openDrawer,600);
+		}
+	});
+	$("#globalmenu").bind("mouseleave",function(){
+		clearTimeout(hoverWaiter); hoverWaiter=null; 
+	}).mousemove(function(){
+		activeMenu?$("#globalmenu a.active").not(activeMenu).removeClass("active"):$("#globalmenu a.active").removeClass("active");
+		if(isDrawerOpen) activeMenu.addClass("active");
+	});
+	$("#header").click(function(e){ if(!$(e.target).is("a,input")){ closeDrawer(); return false; } });
+	var closeClickTargets="#header_wrapper > div";
+	if(document.body.id!="MainBody" && $("body > div").size()==1) closeClickTargets+=", body, body > div";
+	$(closeClickTargets).click(function(e){
+		if($(e.target).is(closeClickTargets)){
+			closeDrawer(); return false;
+		}
+	});
+	}
+});
+}
+var checkJqDrawer;
+checkJqDrawer=function(){ if(typeof jQuery=="function"){ runJqDrawer(); } else { setTimeout(checkJqDrawer,20); } }
+setTimeout(checkJqDrawer,20);

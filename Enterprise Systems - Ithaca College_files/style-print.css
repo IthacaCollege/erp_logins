@@ -1,0 +1,85 @@
+@import url(/css2/fonts/crimson/stylesheet.css);
+@import url(/css2/fonts/opensans/stylesheet.css);
+
+.globalmenu_wrapper,
+#header ul,
+#header form,
+#breadcrumbs,
+#nav,
+#subnav,
+#header a#header_home_link,
+#header h1,
+#sidebar_foot,
+#footer,
+#who,
+#slidenav,
+#newsnavlinks,
+#blogfooter
+{
+	display: none;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+	font-family: 'OpenSans', Helvetica Neue, Arial, Tahoma,Verdana,sans-serif;
+}
+
+body a:link:after, body a:visited:after { content: none; }
+#content a:link:after, #content a:visited:after {content:" (" attr(href) ")";font-size:90%;}
+
+div.printlogo { margin-bottom: 6%; }
+
+
+
+#site_title a { color: #000; text-decoration: none; }
+#site_title a:link:after, #site_title a:visited:after {content: none;}
+#site_title h1 a span { 
+	font-size: .5em;
+	font-family: "Crimson",Georgia,Serif;
+	font-weight: normal;
+}
+#site_title, #section {
+	margin: 0 5%;
+}
+
+
+div#content {
+	width: auto;
+	margin: 0 5%;
+	padding: 0;
+	float: none !important;
+}
+
+#sidebar {
+	margin: 5%;
+}
+
+#schoolsplash {
+	float: none !important;
+	position: relative;
+	margin: 0 5%;
+}
+#schoolsplash a { text-decoration: none; }
+#schoolsplash a:link:after, #schoolsplash a:visited:after {content: none;}
+
+#fancy { margin: 0; }
+
+/* communications */
+#parallax { display: none; }
+
+/* content collections */
+#item_list .image a:link:after, #item_list .image a:visited:after {content: none;}
+#item_list tr { margin-bottom: 5%; }
+#item_list .image { padding: 0 5% 5% 0; }
+
+#copyright { font-size: .9em; margin-top: 10%; }
+
+body td { vertical-align: top; }
+
+#blogheader a:link:after, #blogheader a:visited:after {content: none;}
+
+
+
+
+
+
+
