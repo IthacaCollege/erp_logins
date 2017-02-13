@@ -1,5 +1,5 @@
-@import url(/css2/fonts/crimson/stylesheet.css);
-@import url(/css2/fonts/opensans/stylesheet.css);
+@import url("https://www.ithaca.edu/css2/fonts/crimson/stylesheet.css");
+@import url("https://www.ithaca.edu/css2/fonts/opensans/stylesheet.css");
 
 .globalmenu_wrapper,
 #header ul,

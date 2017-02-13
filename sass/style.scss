@@ -1,0 +1,43 @@
+@import "bourbon/bourbon";
+@import "neat/neat";
+
+html > body #body_wrap {
+  background: white;
+}
+
+#erp {
+  display: flex;
+  flex-direction: column;
+  @include media(48em) {
+    flex-direction: row;
+  }
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  .erp__card {
+    flex-basis: calc(33% - 1em);
+    background-image: linear-gradient(0deg, #ddd, #eee);
+    margin-bottom: 2em;
+    padding: 1em;
+    border-radius: 1em;
+    a:first-child, a:nth-child(2) {
+      border-width: 0;
+    }
+    p + *, p + * + * {
+      display: none;
+    }
+    position: relative;
+    > a.block-link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+    }
+
+    > a.block-link:hover {
+      background-color: rgba(#fff, 0.2);
+    }
+  }
+}

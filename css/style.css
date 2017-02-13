@@ -1,0 +1,53 @@
+html {
+  box-sizing: border-box; }
+
+*, *::after, *::before {
+  box-sizing: inherit; }
+
+html > body #body_wrap {
+  background: white; }
+
+#erp {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch; }
+  @media screen and (min-width: 48em) {
+    #erp {
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: row;
+              flex-direction: row; } }
+  #erp .erp__card {
+    -ms-flex-preferred-size: calc(33% - 1em);
+        flex-basis: calc(33% - 1em);
+    background-image: -webkit-linear-gradient(bottom, #ddd, #eee);
+    background-image: linear-gradient(0deg, #ddd, #eee);
+    margin-bottom: 2em;
+    padding: 1em;
+    border-radius: 1em;
+    position: relative; }
+    #erp .erp__card a:first-child, #erp .erp__card a:nth-child(2) {
+      border-width: 0; }
+    #erp .erp__card p + *, #erp .erp__card p + * + * {
+      display: none; }
+    #erp .erp__card > a.block-link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10; }
+    #erp .erp__card > a.block-link:hover {
+      background-color: rgba(255, 255, 255, 0.2); }
