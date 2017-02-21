@@ -1,25 +1,83 @@
 @import "bourbon/bourbon";
 @import "neat/neat";
+@import "base/base";
+@import "font-awesome/font-awesome";
 
-html > body #body_wrap {
-  background: white;
+html {
+  font-family: $font-stack-system;
 }
 
-#erp {
-  display: flex;
-  flex-direction: column;
-  @include media(48em) {
-    flex-direction: row;
+body {
+  margin: 0;
+}
+
+header {
+  background-color: #013158;
+  width: 100%;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  line-height: normal;
+  .logoff {
+    float: right;
+    background-color: $action-color;
+    border: 0;
+    border-radius: $base-border-radius;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: $base-font-family;
+    font-size: $base-font-size;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 600;
+    line-height: 1;
+    padding: $small-spacing $base-spacing;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color $base-duration $base-timing;
+    user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+
+    &:hover,
+    &:focus {
+      background-color: shade($action-color, 20%);
+      color: #fff;
+    }
   }
+}
+
+header > div, section {
+  position: relative;
+  max-width: $max-width;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.erp {
+  display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: stretch;
   .erp__card {
-    flex-basis: calc(25% - 1.25em);
-    background-image: linear-gradient(0deg, #ddd, #eee);
+    flex-basis: 100%;
+    @include media(min-width 24em max-width 35.99em) {
+      flex-basis: calc(50% - 0.5em);
+    }
+    @include media(min-width 36em max-width 47.99em) {
+      flex-basis: calc(33% - 0.8em);
+    }
+    @include media(48em) {
+      flex-basis: calc(25% - 1.25em);
+    }
+    background-image: linear-gradient(0deg, #ececec, #eee);
     margin-bottom: 2em;
-    padding: 1em;
+    padding: 1em 1em 3em;
+    &.erp__minor {
+      padding: 0 0.2em;
+    }
     border-radius: 1em;
+    text-align: center;
     > a:nth-child(2) {
       display: block;
       width: 100px;
@@ -31,6 +89,9 @@ html > body #body_wrap {
     p + *, p + * + * {
       display: none;
     }
+    div.notice {
+      display: block !important;
+    }
     position: relative;
     > a.block-link {
       position: absolute;
@@ -39,9 +100,147 @@ html > body #body_wrap {
       width: 100%;
       height: 100%;
       z-index: 10;
+      border-radius: 1em;
+      transition: background-color 0.3s;
     }
     > a.block-link:hover {
-      background-color: rgba(#fff, 0.2);
+      background-color: rgba(#000, 0.2);
     }
+    > a.info-link {
+      position: absolute;
+      bottom: 0.5em;
+      right: 0.5em;
+      font-size: 1.3em;
+      font-weight: bold;
+      font-family: $font-stack-hoefler-text;
+      display: inline-block;
+      padding: 0.3em 0.55em 0.1em;
+      line-height: 1em;
+      border-radius: 0.75em;
+      z-index: 20;
+      color: white;
+      background-color: #999999;
+      &:hover {
+        background-color: white;
+        color: #999999;
+      }
+    }
+    button:last-child {
+      display: inline-block;
+      position: absolute;
+      bottom: 0.5em;
+      left: calc(50% - 4.4em);
+      z-index: 21;
+    }
+  }
+}
+.erp__details {
+  background-color: white;
+  border-radius: 1em;
+  padding: 1em;
+}
+#login {
+  width: 100%;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+  @include media($medium-screen) {
+    width: 30em;
+    left: calc(50vw - 15em);
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 4em;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+  }
+  background-color: #eee;
+  border: 1px solid  #ddd;
+  padding: 1em;
+}
+ul.default {
+  list-style-type:disc;
+  margin-bottom:.75em;
+  padding-left:1.5em
+}
+ol.default {
+  list-style-type:decimal;
+  margin-bottom:.75em;
+  padding-left:1.5em
+}
+.clearfix {
+  @include clearfix;
+}
+.error_text {
+  color: darken(red, 20%);
+}
+p.error_text, div.error_text {
+  border-radius: 0.5em;
+  border: 1px solid  darken(red, 20%);
+  padding: 0.5em;
+  background-color: lighten(red, 40%);
+}
+#loginbutton, #logoutbutton {
+  font-size: 0.8em;
+}
+form.search {
+  display: none;
+  @include media($medium-screen) {
+    display: inline-block;
+  }
+  @include media($large-screen) {
+    display: inline-block;
+  }
+  > * {
+    margin: 0;
+    font-size: 0.8em;
+  }
+  input[type='text'] {
+
+    width: 10em;
+    @include media($large-screen) {
+      width: 20em;
+    }
+    display: inline-block;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+  }
+  button {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+}
+#modalShade {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(black, 0.6);
+  z-index: 100;
+  content: "\00A0";
+}
+.modal {
+  position: fixed;
+  z-index: 120;
+  top: 0;
+  left: 0;
+  max-height: 100vh;
+  overflow-y: auto;
+  width: 100%;
+  @include media($medium-screen) {
+    top: 10vh;
+    max-height: 80vh;
+    left: 10vw;
+    width: 80vw;
+  }
+}
+.header-items {
+  display: inline;
+  float: right;
+}
+.close, #logoutbutton {
+  background-color: white;
+  color: $action-color;
+  &:hover {
+    background-color: darken(lightgrey, 0.1);
   }
 }
